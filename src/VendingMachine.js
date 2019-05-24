@@ -8,7 +8,9 @@ class VendingMachine {
     this.maxStockForOneProduct = 30;
     this.maxCoinCapacity = 100;
   }
-
+  printInventory(){
+    return this.products;
+  }
   refillProducts() {
     this.products = this.products.map(product => ({
       ...product,

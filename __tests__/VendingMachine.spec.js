@@ -16,6 +16,14 @@ describe("VendingMachine", () => {
         test.initialCoins.coins
       );
     });
+    describe("Print vending machine inventory", () => {
+      beforeEach(() => { 
+        test.result = test.subject.printInventory();
+      });
+      it("should return all the product stock", () => {
+        expect(test.result).toEqual(test.initialProducts.products);
+      });
+    });
     describe("refill all products", () => {
       beforeEach(() => {
         test.refilledProducts = require("../inputs/refilledProducts");
