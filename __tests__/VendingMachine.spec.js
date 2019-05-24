@@ -21,11 +21,19 @@ describe("VendingMachine", () => {
         test.refilledProducts = require("../inputs/refilledProducts");
         test.result = test.subject.refillProducts();
       });
-      it("should refill all the products refilled", () => {
+      it("should refill all the refilled products", () => {
         expect(test.result).toEqual(test.refilledProducts.products);
       });
     });
-    describe("")
+    describe("refill all coins", () => {
+      beforeEach(() => {
+        test.refilledCoins = require("../inputs/refilledCoins");
+        test.result = test.subject.refillCoins();
+      });
+      it("should refill all the refilled coins", () => {
+        expect(test.result).toEqual(test.refilledCoins.coins);
+      });
+    });
   });
 
   describe("products or changes are not enough in vending machine", () => {
