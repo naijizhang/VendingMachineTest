@@ -25,6 +25,7 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual(test.refilledProducts.products);
       });
     });
+    describe("")
   });
 
   describe("products or changes are not enough in vending machine", () => {

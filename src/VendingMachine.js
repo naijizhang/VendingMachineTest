@@ -5,7 +5,7 @@ class VendingMachine {
     }
     this.products = initialProducts;
     this.coins = initialCoins;
-    this.maxInventoryForOneProduct = 30;
+    this.maxStockForOneProduct = 30;
     this.maxCoinCapacity = 200;
   }
  
@@ -14,12 +14,14 @@ class VendingMachine {
   refillProducts() {
     this.products=this.products.map(product => ({
       ...product,
-      inventory: this.maxInventoryForOneProduct
+      stock: this.maxStockForOneProduct
     }));
     console.log("refilled products:",this.products)
     return this.products;
   }
-  refillCoins() {}
+  refillCoins() {
+
+  }
 
   buyOne(id, moneyInput) {}
   getAllInventories() {}
