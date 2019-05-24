@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Coke",
+      "price": 1.5,
+      "inventory": 5
+    },
+    {
+      "id": 2,
+      "name": "Sprite",
+      "price": 1.5,
+      "inventory": 5
+    },
+    {
+      "id": 3,
+      "name": "Fanta",
+      "price": 1.5,
+      "inventory": 5
+    }
+  ]
+}

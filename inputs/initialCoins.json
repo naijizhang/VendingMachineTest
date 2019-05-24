@@ -1,0 +1,10 @@
+{
+  "coins": [
+    { "name": "Penny", "value": 0.01, "quantity": 10 },
+    { "name": "Nickel", "value": 0.05, "quantity": 10 },
+    { "name": "Dime", "value": 0.1, "quantity": 10 },
+    { "name": "Quarter", "value": 0.25, "quantity": 10 },
+    { "name": "Toonie", "value": 1, "quantity": 10 },
+    { "name": "Loonie", "value": 2, "quantity": 10 }
+  ]
+}
