@@ -1,0 +1,66 @@
+{
+  "initialProducts": [
+    {
+      "id": 1,
+      "name": "Coke",
+      "price": 1.5,
+      "stock": 5
+    },
+    {
+      "id": 2,
+      "name": "Sprite",
+      "price": 1.5,
+      "stock": 0
+    },
+    {
+      "id": 3,
+      "name": "Fanta",
+      "price": 1.5,
+      "stock": 5
+    }
+  ],
+  "refilledProducts": [
+    {
+      "id": 1,
+      "name": "Coke",
+      "price": 1.5,
+      "stock": 30
+    },
+    {
+      "id": 2,
+      "name": "Sprite",
+      "price": 1.5,
+      "stock": 30
+    },
+    {
+      "id": 3,
+      "name": "Fanta",
+      "price": 1.5,
+      "stock": 30
+    }
+  ],
+  "initialCoins": [
+    { "name": "Penny", "value": 0.01, "quantity": 10 },
+    { "name": "Nickel", "value": 0.05, "quantity": 10 },
+    { "name": "Dime", "value": 0.1, "quantity": 10 },
+    { "name": "Quarter", "value": 0.25, "quantity": 10 },
+    { "name": "Toonie", "value": 1, "quantity": 10 },
+    { "name": "Loonie", "value": 2, "quantity": 10 }
+  ],
+  "refilledCoins": [
+    { "name": "Penny", "value": 0.01, "quantity": 100 },
+    { "name": "Nickel", "value": 0.05, "quantity": 100 },
+    { "name": "Dime", "value": 0.1, "quantity": 100 },
+    { "name": "Quarter", "value": 0.25, "quantity": 100 },
+    { "name": "Toonie", "value": 1, "quantity": 100 },
+    { "name": "Loonie", "value": 2, "quantity": 100 }
+  ],
+  "notEnoughCoins": [
+    { "name": "Penny", "value": 0.01, "quantity": 0 },
+    { "name": "Nickel", "value": 0.05, "quantity": 0 },
+    { "name": "Dime", "value": 0.1, "quantity": 0 },
+    { "name": "Quarter", "value": 0.25, "quantity": 0 },
+    { "name": "Toonie", "value": 1, "quantity": 0 },
+    { "name": "Loonie", "value": 2, "quantity": 0 }
+  ]
+}

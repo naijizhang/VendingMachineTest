@@ -39,11 +39,17 @@ class VendingMachine {
     if(moneyInput<product.price){
       return `Need insert $${product.price-moneyInput} to puechase`
     }
-    
-     //stock -1
+    const changes=moneyInput-product.price;
+    if(!this.changeMoney(changes)){
+      return 'Not enough coins to change now, please come back later'
+    }
     //change money
+    //stock -1
+    
   }
-
+  changeMoney(changes){
+    return null;
+  }
   getInventoryById() {}
   getProductById(id) {
     const product = this.products.filter(item => item.id === id);

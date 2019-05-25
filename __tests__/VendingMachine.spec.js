@@ -3,17 +3,18 @@ describe("VendingMachine", () => {
   let test;
   beforeEach(() => {
     test = {};
+    test.data=require("../src/data");
     test.initialProducts = {};
     test.initialCoins = {};
   });
 
   describe("products and changes enough in vending machine", () => {
     beforeEach(() => {
-      test.initialProducts = require("../inputs/initialProducts");
-      test.initialCoins = require("../inputs/initialCoins");
+      test.initialProducts = test.data.initialProducts;
+      test.initialCoins = test.data.initialCoins;
       test.subject = new VendingMachine(
-        test.initialProducts.products,
-        test.initialCoins.coins
+        test.initialProducts,
+        test.initialCoins
       );
     });
     describe("Print vending machine inventory", () => {
@@ -21,25 +22,25 @@ describe("VendingMachine", () => {
         test.result = test.subject.printInventory();
       });
       it("should return all the product stock", () => {
-        expect(test.result).toEqual(test.initialProducts.products);
+        expect(test.result).toEqual(test.initialProducts);
       });
     });
     describe("refill all products", () => {
       beforeEach(() => {
-        test.refilledProducts = require("../inputs/refilledProducts");
+        test.refilledProducts = test.data.refilledProducts;
         test.result = test.subject.refillProducts();
       });
       it("should refill all the refilled products", () => {
-        expect(test.result).toEqual(test.refilledProducts.products);
+        expect(test.result).toEqual(test.data.refilledProducts);
       });
     });
     describe("refill all coins", () => {
       beforeEach(() => {
-        test.refilledCoins = require("../inputs/refilledCoins");
+        test.refilledCoins = test.data.refilledCoins;
         test.result = test.subject.refillCoins();
       });
       it("should refill all the refilled coins", () => {
-        expect(test.result).toEqual(test.refilledCoins.coins);
+        expect(test.result).toEqual(test.data.refilledCoins);
       });
     });
     describe("buy one product, when id not exist", () => {
@@ -64,6 +65,14 @@ describe("VendingMachine", () => {
       });
       it("should return sold out", () => {
         expect(test.result).toEqual("Sold out.");
+      });
+    });
+    describe("buy one product, but the machine doesn't have enough coins to change", () => {
+      beforeEach(() => {
+        test.result = test.subject.buyOne(1,2);
+      });
+      it("should return there is not enough coins to change", () => {
+        expect(test.result).toEqual('Not enough coins to change now, please come back later');
       });
     });
   });
