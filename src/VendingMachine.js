@@ -33,9 +33,13 @@ class VendingMachine {
     if (!product) {
       return `The product ${id} is not exist`;
     }
+    if(product.stock===0){
+      return "Sold out."
+    }
     if(moneyInput<product.price){
       return `Need insert $${product.price-moneyInput} to puechase`
     }
+    
      //stock -1
     //change money
   }

@@ -58,6 +58,14 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual("Need insert $0.5 to puechase");
       });
     });
+    describe("buy one product, when the product stock is 0", () => {
+      beforeEach(() => {
+        test.result = test.subject.buyOne(2,2);
+      });
+      it("should return sold out", () => {
+        expect(test.result).toEqual("Sold out.");
+      });
+    });
   });
 
   describe("products or changes are not enough in vending machine", () => {
