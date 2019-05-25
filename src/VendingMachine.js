@@ -33,22 +33,59 @@ class VendingMachine {
     if (!product) {
       return `The product ${id} is not exist`;
     }
-    if(product.stock===0){
-      return "Sold out."
+    if (product.stock === 0) {
+      return "Sold out.";
     }
-    if(moneyInput<product.price){
-      return `Need insert $${product.price-moneyInput} to puechase`
+    if (moneyInput < product.price) {
+      return `Need insert $${product.price - moneyInput} to puechase`;
     }
-    const changes=moneyInput-product.price;
-    if(!this.changeMoney(changes)){
-      return 'Not enough coins to change now, please come back later'
+    const supposedToChange = moneyInput - product.price;
+    const changes = this.changeMoney(supposedToChange);
+    if (!changes) {
+      return "Not enough coins to change now, please come back later";
+    } else {
+      //stock -1
+      this.reduceStockForProduct(product.id);
+      console.log("Payment success, the changes:", changes);
+      console.log("Payment success, the inventory:", this.products);
+      console.log("Payment success, the coins in the machine:", this.coins);
+      return changes;
     }
+
     //change money
-    //stock -1
-    
   }
-  changeMoney(changes){
-    return null;
+  changeMoney(changes) {
+    const finalChanges = [];
+    let remain = changes;
+    this.coins
+      .sort((a, b) => b.value - a.value)
+      .map(coin => {
+        if (remain >= coin.value) {
+          let bestToChange = Math.floor(remain / coin.value);
+          if (coin.quantity < bestToChange) {
+            bestToChange = coin.quantity;
+          }
+          finalChanges.push({ coin: coin.name, quantity: bestToChange });
+          coin.quantity -= bestToChange;
+          remain -= bestToChange * coin.value;
+        }
+      });
+    let result = "Take the product and here is the changes:";
+    finalChanges.map(change => {
+      result += change.quantity + "-" + change.coin + " ";
+    });
+    if (remain === 0) {
+      return result;
+    } else {
+      return null;
+    }
+  }
+  reduceStockForProduct(id) {
+    this.products.map(item => {
+      if (item.id === id) {
+        item.stock--;
+      }
+    });
   }
   getInventoryById() {}
   getProductById(id) {
