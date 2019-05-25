@@ -42,6 +42,14 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual(test.refilledCoins.coins);
       });
     });
+    describe("buy one product, when id not exist", () => {
+      beforeEach(() => {
+        test.result = test.subject.buyOne(10,5);
+      });
+      it("should product not exist", () => {
+        expect(test.result).toEqual("The product 10 is not exist");
+      });
+    });
   });
 
   describe("products or changes are not enough in vending machine", () => {

@@ -8,7 +8,7 @@ class VendingMachine {
     this.maxStockForOneProduct = 30;
     this.maxCoinCapacity = 100;
   }
-  printInventory(){
+  printInventory() {
     return this.products;
   }
   refillProducts() {
@@ -28,9 +28,19 @@ class VendingMachine {
     return this.coins;
   }
 
-  buyOne(id, moneyInput) {}
-  getAllInventories() {}
-  getInventoriesById() {}
-  getProductById() {}
+  buyOne(id, moneyInput) {
+    const product = this.getProductById(id);
+    if (!product) {
+      return `The product ${id} is not exist`;
+    }
+  }
+
+  getInventoryById() {}
+  getProductById(id) {
+    const product = this.products.filter(item => item.id === id);
+    if (product.length === 0) {
+      return null;
+    } else return product[0];
+  }
 }
 module.exports = VendingMachine;
