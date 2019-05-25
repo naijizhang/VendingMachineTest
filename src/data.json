@@ -56,11 +56,11 @@
     { "name": "Loonie", "value": 2, "quantity": 100 }
   ],
   "notEnoughCoins": [
-    { "name": "Penny", "value": 0.01, "quantity": 0 },
-    { "name": "Nickel", "value": 0.05, "quantity": 0 },
-    { "name": "Dime", "value": 0.1, "quantity": 0 },
-    { "name": "Quarter", "value": 0.25, "quantity": 0 },
-    { "name": "Toonie", "value": 1, "quantity": 0 },
-    { "name": "Loonie", "value": 2, "quantity": 0 }
+    { "name": "Penny", "value": 0.01, "quantity": 30 },
+    { "name": "Nickel", "value": 0.05, "quantity": 20 },
+    { "name": "Dime", "value": 0.1, "quantity": 3 },
+    { "name": "Quarter", "value": 0.25, "quantity": 1 },
+    { "name": "Toonie", "value": 1, "quantity": 1 },
+    { "name": "Loonie", "value": 2, "quantity": 1 }
   ]
 }

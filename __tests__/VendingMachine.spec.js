@@ -91,11 +91,21 @@ describe("VendingMachine", () => {
     });
     describe("buy one product, but the machine doesn't have enough coins to change", () => {
       beforeEach(() => {
-        test.result = test.subject.buyOne(1, 2);
+        test.result = test.subject.buyOne(1, 20);
       });
       it("should return there is not enough coins to change", () => {
         expect(test.result).toEqual(
           "Not enough coins to change now, please come back later"
+        );
+      });
+    });
+    describe("buy one product, when there is not enough 0.25 coins", () => {
+      beforeEach(() => {
+        test.result = test.subject.buyOne(1, 2.25);
+      });
+      it("should return the changes with other coins", () => {
+        expect(test.result).toEqual(
+          "Take the product and here is the changes:1-Quarter 3-Dime 4-Nickel "
         );
       });
     });

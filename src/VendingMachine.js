@@ -46,9 +46,9 @@ class VendingMachine {
     } else {
       //stock -1
       this.reduceStockForProduct(product.id);
-      console.log("Payment success, the changes:", changes);
-      console.log("Payment success, the inventory:", this.products);
-      console.log("Payment success, the coins in the machine:", this.coins);
+      console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the changes:`, changes);
+      console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the inventory:`, this.products);
+      console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the coins in the machine:`, this.coins);
       return changes;
     }
 
@@ -60,21 +60,21 @@ class VendingMachine {
     this.coins
       .sort((a, b) => b.value - a.value)
       .map(coin => {
-        if (remain >= coin.value) {
+        if (coin.quantity > 0 && remain >= coin.value) {
           let bestToChange = Math.floor(remain / coin.value);
           if (coin.quantity < bestToChange) {
             bestToChange = coin.quantity;
           }
           finalChanges.push({ coin: coin.name, quantity: bestToChange });
-          coin.quantity -= bestToChange;
-          remain -= bestToChange * coin.value;
+          remain -= (bestToChange * coin.value).toFixed(2);
         }
       });
-    let result = "Take the product and here is the changes:";
-    finalChanges.map(change => {
-      result += change.quantity + "-" + change.coin + " ";
-    });
     if (remain === 0) {
+      let result = "Take the product and here is the changes:";
+      finalChanges.map(change => {
+        this.reduceCoinQuantity(change.coin, change.quantity);
+        result += change.quantity + "-" + change.coin + " ";
+      });
       return result;
     } else {
       return null;
@@ -84,6 +84,13 @@ class VendingMachine {
     this.products.map(item => {
       if (item.id === id) {
         item.stock--;
+      }
+    });
+  }
+  reduceCoinQuantity(name, quantity) {
+    this.coins.map(coin => {
+      if (coin.name === name) {
+        coin.quantity -= quantity;
       }
     });
   }
