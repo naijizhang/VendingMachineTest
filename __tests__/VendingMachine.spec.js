@@ -50,6 +50,14 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual("The product 10 is not exist");
       });
     });
+    describe("buy one product, when money input is not enough to buy", () => {
+      beforeEach(() => {
+        test.result = test.subject.buyOne(1,1);
+      });
+      it("should return need more cash input", () => {
+        expect(test.result).toEqual("Need insert $0.5 to puechase");
+      });
+    });
   });
 
   describe("products or changes are not enough in vending machine", () => {
