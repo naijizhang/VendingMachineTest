@@ -39,7 +39,7 @@ class VendingMachine {
     if (moneyInput < product.price) {
       return `Need insert $${product.price - moneyInput} to puechase`;
     }
-    const supposedToChange = moneyInput - product.price;
+    const supposedToChange = (moneyInput - product.price).toFixed(2);
     const changes = this.changeMoney(supposedToChange);
     if (!changes) {
       return "Not enough coins to change now, please come back later";
@@ -47,12 +47,10 @@ class VendingMachine {
       //stock -1
       this.reduceStockForProduct(product.id);
       console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the changes:`, changes);
-      console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the inventory:`, this.products);
-      console.log(`Payment success insert $${moneyInput} to buy $${product.price} ${product.name}, the coins in the machine:`, this.coins);
+      console.log(`current inventory:`, this.products);
+      console.log(`current coins in the machine:`, this.coins);
       return changes;
     }
-
-    //change money
   }
   changeMoney(changes) {
     const finalChanges = [];
@@ -66,10 +64,12 @@ class VendingMachine {
             bestToChange = coin.quantity;
           }
           finalChanges.push({ coin: coin.name, quantity: bestToChange });
-          remain -= (bestToChange * coin.value).toFixed(2);
+          remain = (remain- (bestToChange * coin.value)).toFixed(2);
         }
       });
-    if (remain === 0) {
+    if (!(remain > 0)) {
+      if(finalChanges.length===0)
+          return "Perfect! Here is the product."
       let result = "Take the product and here is the changes:";
       finalChanges.map(change => {
         this.reduceCoinQuantity(change.coin, change.quantity);
