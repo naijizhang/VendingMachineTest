@@ -7,7 +7,7 @@ describe("VendingMachine", () => {
     test.initialProducts = {};
     test.initialCoins = {};
   });
-  describe("products or changes are not enough in vending machine", () => {
+  describe("When products or changes are not enough in vending machine", () => {
     beforeEach(() => {
       test.initialProducts = test.data.initialProducts;
       test.initialCoins = test.data.notEnoughCoins;
@@ -16,7 +16,7 @@ describe("VendingMachine", () => {
         test.initialCoins
       );
     });
-    describe("buy product 2 (stock 0), return sold out", () => {
+    describe("When buying a product that is out of stock", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(2, 2);
       });
@@ -24,7 +24,7 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual("Sold out.");
       });
     });
-    describe("buy product 1 insert $20, but the machine doesn't have enough coins to change", () => {
+    describe("When buying a product you insert $20, but the machine doesn't have enough coins to return", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(1, 20);
       });
@@ -34,7 +34,7 @@ describe("VendingMachine", () => {
         );
       });
     });
-    describe("buy product 1 insert $2.25, but there is not enough Quarters", () => {
+    describe("When buying a product(id:1,price:1.5) user inserts $2.25, but there is not enough quarters", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(1, 2.25);
       });
@@ -45,7 +45,7 @@ describe("VendingMachine", () => {
       });
     });
   });
-  describe("products and changes enough in vending machine", () => {
+  describe("When products and money are enough in vending machine", () => {
     beforeEach(() => {
       test.initialProducts = test.data.initialProducts;
       test.initialCoins = test.data.initialCoins;
@@ -54,7 +54,7 @@ describe("VendingMachine", () => {
         test.initialCoins
       );
     });
-    describe("Print vending machine inventory", () => {
+    describe("When printing vending machine inventory", () => {
       beforeEach(() => {
         test.result = test.subject.printInventory();
       });
@@ -62,12 +62,12 @@ describe("VendingMachine", () => {
         expect(test.result).toEqual(test.initialProducts);
       });
     });
-    describe("refill all products", () => {
+    describe("When refilling all products in vending machine", () => {
       beforeEach(() => {
         test.refilledProducts = test.data.refilledProducts;
         test.result = test.subject.refillProducts();
       });
-      it("should refill all the refilled products", () => {
+      it("should return a list of the refilled product", () => {
         expect(test.result).toEqual(test.data.refilledProducts);
       });
     });
@@ -76,63 +76,63 @@ describe("VendingMachine", () => {
         test.refilledCoins = test.data.refilledCoins;
         test.result = test.subject.refillCoins();
       });
-      it("should refill all the refilled coins", () => {
+      it("should return a list of the refilled coins", () => {
         expect(test.result).toEqual(test.data.refilledCoins);
       });
     });
-    describe("buy product 10(not exist) insert $5", () => {
+    describe("When buying a product that does not exist (id:10)", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(10, 5);
       });
-      it("return product not exist when get invalid input", () => {
+      it("should return a message that says, product does not exist", () => {
         expect(test.result).toEqual("The product 10 is not exist");
       });
     });
-    describe("buy product 1 insert $1 (not enough to buy)", () => {
+    describe("When buying product (id:1 price:1.5), user inserts $1 which is not enough to buy", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(1, 1);
       });
-      it("need insert $0.5 to continue purchase", () => {
+      it("should return a message saying please insert $0.5 to continue purchase", () => {
         expect(test.result).toEqual("Need insert $0.5 to puechase");
       });
     });
-    describe("buy one product, success. And get the changes", () => {
+    describe("When buying a product and user inserts extra money", () => {
       beforeEach(() => {
         test.result = test.subject.buyOne(1, 2.25);
       });
-      it("buy product 1 insert $2.25, changes: 3-Quarter", () => {
+      it("should return the product and change: 3 quarters", () => {
         expect(test.result).toEqual(
           "Take the product and here is the changes:3-Quarter "
         );
       });
     });
-    describe("Continue purchase products situation until sold out or no coins in machine", () => {
-      it("buy product 1 insert $5, changes: 1-Loonie 1-Toonie 2-Quarter", () => {
+    describe("When purchasing a product back to back, until the product is sold out or until there are no coins in machine", () => {
+      it("should take product(id:1) and return change for $5 in 1-Loonie 1-Toonie 2-Quarter", () => {
         expect(test.subject.buyOne(1, 5)).toEqual(
           "Take the product and here is the changes:1-Loonie 1-Toonie 2-Quarter "
         );
       });
-      it("buy product 1 insert $10, changes: 4-Loonie 2-Quarter", () => {
+      it("should take product(id:1) and return change for $10 in 4-Loonie 2-Quarter", () => {
         expect(test.subject.buyOne(1, 10)).toEqual(
           "Take the product and here is the changes:4-Loonie 2-Quarter "
         );
       });
-      it("buy product 1 should return Sold out", () => {
+      it("When trying to buy product (id:1), it should return a message saying Sold out", () => {
         expect(test.subject.buyOne(1, 20)).toEqual(
           "Sold out."
         );
       });
-      it("buy product 3 insert $3.34, changes:1-Loonie 2-Penny", () => {
+      it("When buying product (id:3) user inserts $3.34, changes:1-Loonie 2-Penny", () => {
         expect(test.subject.buyOne(3, 3.34)).toEqual(
           "Take the product and here is the changes:1-Loonie 2-Penny "
         );
       });
-      it("buy product 3 insert $10, changes:4-Loonie 2-Quarter 1-Dime 1-Nickel 3-Penny ", () => {
+      it("When buying product (id:3) user inserts $10, changes:4-Loonie 2-Quarter 1-Dime 1-Nickel 3-Penny ", () => {
         expect(test.subject.buyOne(3, 10)).toEqual(
           "Take the product and here is the changes:4-Loonie 2-Quarter 1-Dime 1-Nickel 3-Penny "
         );
       });
-       it("buy product 3 insert $1.32, no change", () => {
+       it("When buying product (id:3) user inserts $1.32, they should get no change back", () => {
         expect(test.subject.buyOne(3, 1.32)).toEqual(
           "Perfect! Here is the product."
         );
